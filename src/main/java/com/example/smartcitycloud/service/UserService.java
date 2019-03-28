@@ -9,11 +9,10 @@ import com.example.smartcitycloud.util.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,5 +45,16 @@ public class UserService {
             return Result.builder().code(0).msg("success").data(data).build();
         }
         return Result.builder().code(-1).msg("用户名或者密码错误").build();
+    }
+
+    public Result add(User user) {
+        Date now = new Date();
+        user.setCreateTs(now);
+        user.setUpdateTs(now);
+        int i = userMapper.insertSelective(user);
+        if (i > 0) {
+            return Result.builder().code(0).msg("添加成功").build();
+        }
+        return Result.builder().code(-1).msg("添加失败").build();
     }
 }

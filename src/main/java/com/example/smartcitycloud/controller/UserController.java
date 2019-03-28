@@ -1,5 +1,6 @@
 package com.example.smartcitycloud.controller;
 
+import com.example.smartcitycloud.entity.User;
 import com.example.smartcitycloud.service.UserService;
 import com.example.smartcitycloud.util.Consts;
 import com.example.smartcitycloud.util.Result;
@@ -7,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
@@ -38,6 +38,17 @@ public class UserController {
         return Result.builder().build();
     }
 
+    @ResponseBody
+    @PostMapping("addUser")
+    public Result add(@RequestBody User user) {
+        try {
+            log.info("add user,params#{}", user);
+            return userService.add(user);
+        } catch (Exception e) {
+            log.error("add user error#{}", e);
+            return Result.builder().code(-1).msg("添加用户失败").build();
+        }
+    }
 
 
 }

@@ -1,7 +1,10 @@
 package com.example.smartcitycloud.interceptor;
 
+import com.example.smartcitycloud.util.Consts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,11 +30,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         log.info("sessionId#{}", session.getId());
 
-//        if (session == null || StringUtils.isEmpty(session.getAttribute(Consts.SEESION_UNAME))) {
-//            log.info("access#{}, not logged in, return", reqPath);
-//            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-//            return false;
-//        }
+        if (session == null || StringUtils.isEmpty(session.getAttribute(Consts.SEESION_UNAME))) {
+            log.info("access#{}, not logged in, return", reqPath);
+            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return false;
+        }
 
         return true;
     }
