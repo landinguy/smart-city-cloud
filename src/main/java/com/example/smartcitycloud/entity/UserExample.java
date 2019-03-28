@@ -5,6 +5,24 @@ import java.util.Date;
 import java.util.List;
 
 public class UserExample {
+    protected Integer pageNo, pageSize;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
     protected String orderByClause;
 
     protected boolean distinct;
