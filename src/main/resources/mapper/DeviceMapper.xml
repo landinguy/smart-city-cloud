@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.smartcitycloud.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.example.smartcitycloud.entity.User">
+<mapper namespace="com.example.smartcitycloud.dao.DeviceMapper">
+  <resultMap id="BaseResultMap" type="com.example.smartcitycloud.entity.Device">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="create_ts" jdbcType="TIMESTAMP" property="createTs" />
     <result column="update_ts" jdbcType="TIMESTAMP" property="updateTs" />
   </resultMap>
@@ -69,16 +69,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, nickname, password, role, create_ts, update_ts
+    id, name, type, description, uid, create_ts, update_ts
   </sql>
-  <select id="selectByExample" parameterType="com.example.smartcitycloud.entity.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.example.smartcitycloud.entity.DeviceExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     'true' as QUERYID,
     <include refid="Base_Column_List" />
-    from user
+    from device
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,44 +92,44 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from user
+    from device
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
+    delete from device
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.example.smartcitycloud.entity.UserExample">
-    delete from user
+  <delete id="deleteByExample" parameterType="com.example.smartcitycloud.entity.DeviceExample">
+    delete from device
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.example.smartcitycloud.entity.User">
-    insert into user (id, username, nickname, 
-      password, role, create_ts, 
+  <insert id="insert" parameterType="com.example.smartcitycloud.entity.Device">
+    insert into device (id, name, type, 
+      description, uid, create_ts, 
       update_ts)
-    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR}, #{createTs,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{createTs,jdbcType=TIMESTAMP}, 
       #{updateTs,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.example.smartcitycloud.entity.User">
-    insert into user
+  <insert id="insertSelective" parameterType="com.example.smartcitycloud.entity.Device">
+    insert into device
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="username != null">
-        username,
+      <if test="name != null">
+        name,
       </if>
-      <if test="nickname != null">
-        nickname,
+      <if test="type != null">
+        type,
       </if>
-      <if test="password != null">
-        password,
+      <if test="description != null">
+        description,
       </if>
-      <if test="role != null">
-        role,
+      <if test="uid != null">
+        uid,
       </if>
       <if test="createTs != null">
         create_ts,
@@ -142,17 +142,17 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        #{nickname,jdbcType=VARCHAR},
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        #{password,jdbcType=VARCHAR},
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        #{role,jdbcType=VARCHAR},
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="createTs != null">
         #{createTs,jdbcType=TIMESTAMP},
@@ -162,29 +162,29 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.example.smartcitycloud.entity.UserExample" resultType="java.lang.Long">
-    select count(*) from user
+  <select id="countByExample" parameterType="com.example.smartcitycloud.entity.DeviceExample" resultType="java.lang.Long">
+    select count(*) from device
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update user
+    update device
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null">
-        username = #{record.username,jdbcType=VARCHAR},
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.nickname != null">
-        nickname = #{record.nickname,jdbcType=VARCHAR},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.password != null">
-        password = #{record.password,jdbcType=VARCHAR},
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
-      <if test="record.role != null">
-        role = #{record.role,jdbcType=VARCHAR},
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=INTEGER},
       </if>
       <if test="record.createTs != null">
         create_ts = #{record.createTs,jdbcType=TIMESTAMP},
@@ -198,32 +198,32 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update user
+    update device
     set id = #{record.id,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=VARCHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      password = #{record.password,jdbcType=VARCHAR},
-      role = #{record.role,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=INTEGER},
       create_ts = #{record.createTs,jdbcType=TIMESTAMP},
       update_ts = #{record.updateTs,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.example.smartcitycloud.entity.User">
-    update user
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.smartcitycloud.entity.Device">
+    update device
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="nickname != null">
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="password != null">
-        password = #{password,jdbcType=VARCHAR},
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="role != null">
-        role = #{role,jdbcType=VARCHAR},
+      <if test="uid != null">
+        uid = #{uid,jdbcType=INTEGER},
       </if>
       <if test="createTs != null">
         create_ts = #{createTs,jdbcType=TIMESTAMP},
@@ -234,12 +234,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.smartcitycloud.entity.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      role = #{role,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.example.smartcitycloud.entity.Device">
+    update device
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      uid = #{uid,jdbcType=INTEGER},
       create_ts = #{createTs,jdbcType=TIMESTAMP},
       update_ts = #{updateTs,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

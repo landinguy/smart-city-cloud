@@ -30,11 +30,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         HttpSession session = httpServletRequest.getSession();
         log.info("sessionId#{}", session.getId());
 
-        if (session == null || StringUtils.isEmpty(session.getAttribute(Consts.SEESION_UNAME))) {
-            log.info("access#{}, not logged in, return", reqPath);
-            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-            return false;
-        }
+//        if (session == null || StringUtils.isEmpty(session.getAttribute(Consts.SEESION_UNAME))) {
+//            log.info("access#{}, not logged in, return", reqPath);
+//            httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+//            return false;
+//        }
 
         return true;
     }

@@ -18,7 +18,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @ResponseBody
     @GetMapping("login")
     public Result login(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
@@ -29,7 +28,6 @@ public class UserController {
         }
     }
 
-    @ResponseBody
     @GetMapping("logout")
     public Result logout(HttpSession session) {
         if (session != null) {
@@ -39,7 +37,6 @@ public class UserController {
         return Result.builder().build();
     }
 
-    @ResponseBody
     @PostMapping("addAccount")
     public Result add(@RequestBody User user) {
         try {
@@ -51,7 +48,17 @@ public class UserController {
         }
     }
 
-    @ResponseBody
+    @GetMapping("updatePwd")
+    public Result updatePwd(String oldPassword, String newPassword) {
+        try {
+            log.info("update password,oldPassword#{},newPassword#{}", oldPassword, newPassword);
+            return userService.updatePassword(oldPassword, newPassword);
+        } catch (Exception e) {
+            log.error("update password error#{}", e);
+            return Result.builder().code(-1).msg("修改密码失败").build();
+        }
+    }
+
     @PostMapping("getAccount")
     public Result getAccount(@RequestBody UserReq req) {
         try {

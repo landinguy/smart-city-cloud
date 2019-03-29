@@ -26,9 +26,16 @@
         <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources"/>
 
         <!-- dao -->
-        <javaClientGenerator targetPackage="com.example.smartcitycloud.dao" targetProject="src\main\java" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.example.smartcitycloud.dao" targetProject="src\main\java"
+                             type="XMLMAPPER"/>
 
-        <table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"
+        <!--<table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <!--<table tableName="device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"-->
+               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
+        <table tableName="record" domainObjectName="Record" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
         </table>
     </context>
