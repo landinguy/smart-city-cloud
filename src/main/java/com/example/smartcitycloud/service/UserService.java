@@ -10,10 +10,8 @@ import com.example.smartcitycloud.view.UserReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +55,7 @@ public class UserService {
         user.setUpdateTs(now);
         int i;
         if (id != null) {
+            user.setPassword(null);
             i = userMapper.updateByPrimaryKeySelective(user);
         } else {
             user.setCreateTs(now);

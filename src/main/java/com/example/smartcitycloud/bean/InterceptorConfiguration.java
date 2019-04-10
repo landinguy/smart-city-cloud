@@ -13,8 +13,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {// 登录校验
-        List<String> excludePaths = Arrays.asList("/login", "/logout", "/test", "/error", "/users/*",
-                "/tmpl/oapreview/**");
+        List<String> excludePaths = Arrays.asList("/login", "/logout", "/test", "/error", "/addAccount");
         registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(excludePaths);
     }
 }
