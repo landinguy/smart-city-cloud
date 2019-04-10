@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.smartcitycloud.dao.DeviceMapper;
 import com.example.smartcitycloud.dao.RecordMapper;
 import com.example.smartcitycloud.dao.UserMapper;
-import com.example.smartcitycloud.entity.*;
+import com.example.smartcitycloud.entity.Device;
+import com.example.smartcitycloud.entity.DeviceExample;
 import com.example.smartcitycloud.util.Result;
 import com.example.smartcitycloud.view.DeviceReq;
-import com.example.smartcitycloud.view.RecordReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -67,12 +67,6 @@ public class DeviceService {
         }
         JSONObject data = new JSONObject();
         List<Device> list = deviceMapper.selectByExample(example);
-        list.forEach(item -> {
-            if (item.getUid() != null) {
-                User user = userMapper.selectByPrimaryKey(item.getUid());
-                item.setUsername(user.getNickname());
-            }
-        });
         data.fluentPut("list", list).fluentPut("total", total);
         return Result.builder().msg("success").data(data).build();
     }

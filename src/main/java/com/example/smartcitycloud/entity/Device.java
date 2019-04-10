@@ -21,4 +21,6 @@ public class Device {
     private Date createTs;
 
     private Date updateTs;
+
+    private String deviceKey;
 }

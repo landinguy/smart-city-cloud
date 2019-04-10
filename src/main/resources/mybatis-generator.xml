@@ -3,11 +3,11 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- home -->
-    <!--<classPathEntry location="E:\mavenRepository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>-->
+    <classPathEntry location="E:\mavenRepository\mysql\mysql-connector-java\5.1.39\mysql-connector-java-5.1.39.jar"/>
 
     <!-- company -->
-    <classPathEntry
-            location="D:\Application\mavenRepository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>
+    <!--<classPathEntry-->
+    <!--location="D:\Application\mavenRepository\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar"/>-->
 
     <context id="context1">
         <!-- 去掉自动生成的注释 -->
@@ -32,11 +32,11 @@
         <!--<table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"-->
         <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
         <!--</table>-->
-        <!--<table tableName="device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"-->
-               <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
-        <!--</table>-->
-        <table tableName="record" domainObjectName="Record" enableCountByExample="true" enableUpdateByExample="true"
+        <table tableName="device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"
                enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
         </table>
+        <!--<table tableName="record" domainObjectName="Record" enableCountByExample="true" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>

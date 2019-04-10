@@ -7,8 +7,10 @@
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="create_ts" jdbcType="TIMESTAMP" property="createTs" />
     <result column="update_ts" jdbcType="TIMESTAMP" property="updateTs" />
+    <result column="device_key" jdbcType="VARCHAR" property="deviceKey" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, type, description, uid, create_ts, update_ts
+    id, name, type, description, uid, username, create_ts, update_ts, device_key
   </sql>
   <select id="selectByExample" parameterType="com.example.smartcitycloud.entity.DeviceExample" resultMap="BaseResultMap">
     select
@@ -107,11 +109,13 @@
   </delete>
   <insert id="insert" parameterType="com.example.smartcitycloud.entity.Device">
     insert into device (id, name, type, 
-      description, uid, create_ts, 
-      update_ts)
+      description, uid, username, 
+      create_ts, update_ts, device_key
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{description,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{createTs,jdbcType=TIMESTAMP}, 
-      #{updateTs,jdbcType=TIMESTAMP})
+      #{description,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{createTs,jdbcType=TIMESTAMP}, #{updateTs,jdbcType=TIMESTAMP}, #{deviceKey,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.example.smartcitycloud.entity.Device">
     insert into device
@@ -131,11 +135,17 @@
       <if test="uid != null">
         uid,
       </if>
+      <if test="username != null">
+        username,
+      </if>
       <if test="createTs != null">
         create_ts,
       </if>
       <if test="updateTs != null">
         update_ts,
+      </if>
+      <if test="deviceKey != null">
+        device_key,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -154,11 +164,17 @@
       <if test="uid != null">
         #{uid,jdbcType=INTEGER},
       </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
       <if test="createTs != null">
         #{createTs,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTs != null">
         #{updateTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKey != null">
+        #{deviceKey,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -186,11 +202,17 @@
       <if test="record.uid != null">
         uid = #{record.uid,jdbcType=INTEGER},
       </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
       <if test="record.createTs != null">
         create_ts = #{record.createTs,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTs != null">
         update_ts = #{record.updateTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deviceKey != null">
+        device_key = #{record.deviceKey,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -204,8 +226,10 @@
       type = #{record.type,jdbcType=INTEGER},
       description = #{record.description,jdbcType=VARCHAR},
       uid = #{record.uid,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
       create_ts = #{record.createTs,jdbcType=TIMESTAMP},
-      update_ts = #{record.updateTs,jdbcType=TIMESTAMP}
+      update_ts = #{record.updateTs,jdbcType=TIMESTAMP},
+      device_key = #{record.deviceKey,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -225,11 +249,17 @@
       <if test="uid != null">
         uid = #{uid,jdbcType=INTEGER},
       </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
       <if test="createTs != null">
         create_ts = #{createTs,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTs != null">
         update_ts = #{updateTs,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceKey != null">
+        device_key = #{deviceKey,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -240,8 +270,10 @@
       type = #{type,jdbcType=INTEGER},
       description = #{description,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
       create_ts = #{createTs,jdbcType=TIMESTAMP},
-      update_ts = #{updateTs,jdbcType=TIMESTAMP}
+      update_ts = #{updateTs,jdbcType=TIMESTAMP},
+      device_key = #{deviceKey,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
