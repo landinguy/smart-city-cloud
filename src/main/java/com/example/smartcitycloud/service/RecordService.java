@@ -1,19 +1,17 @@
 package com.example.smartcitycloud.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.smartcitycloud.dao.DeviceMapper;
 import com.example.smartcitycloud.dao.RecordMapper;
-import com.example.smartcitycloud.dao.UserMapper;
-import com.example.smartcitycloud.entity.*;
+import com.example.smartcitycloud.entity.Record;
+import com.example.smartcitycloud.entity.RecordExample;
 import com.example.smartcitycloud.util.Result;
-import com.example.smartcitycloud.view.DeviceReq;
 import com.example.smartcitycloud.view.RecordReq;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -26,7 +24,7 @@ public class RecordService {
     private HttpServletRequest request;
 
     public Result add(Record record) {
-        record.setTime(String.valueOf(System.currentTimeMillis()));
+        if (StringUtils.isEmpty(record.getTime())) record.setTime(String.valueOf(System.currentTimeMillis()));
         int i = recordMapper.insertSelective(record);
         if (i > 0) {
             log.info("add device data successfully");
