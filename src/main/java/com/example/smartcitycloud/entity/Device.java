@@ -23,4 +23,6 @@ public class Device {
     private Date updateTs;
 
     private String deviceKey;
+
+    private String address;
 }
