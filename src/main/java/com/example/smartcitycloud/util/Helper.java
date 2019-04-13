@@ -8,6 +8,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +40,10 @@ public class Helper {
 
     public static LocalDateTime str2DateTime(String str) {
         return LocalDateTime.parse(str, DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss"));
+    }
+
+    public static String getUUID() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
     public static void main(String[] args) {

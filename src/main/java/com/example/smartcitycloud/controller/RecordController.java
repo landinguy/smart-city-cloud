@@ -1,6 +1,5 @@
 package com.example.smartcitycloud.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.example.smartcitycloud.entity.Record;
 import com.example.smartcitycloud.service.RecordService;
 import com.example.smartcitycloud.util.Helper;
@@ -8,8 +7,6 @@ import com.example.smartcitycloud.util.Result;
 import com.example.smartcitycloud.view.RecordReq;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
-import org.apache.xerces.dom.PSVIAttrNSImpl;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,10 +17,6 @@ import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -37,6 +30,7 @@ public class RecordController {
     @Resource
     private RecordService recordService;
 
+    /*** 添加设备数据 ***/
     @PostMapping("addRecord")
     public Result select(@RequestBody Record record) {
         try {
@@ -48,6 +42,7 @@ public class RecordController {
         }
     }
 
+    /*** 查询设备数据 ***/
     @PostMapping("getRecord")
     public Result select(@RequestBody RecordReq req) {
         try {
@@ -59,6 +54,7 @@ public class RecordController {
         }
     }
 
+    /*** 批量导入设备数据 ***/
     @PostMapping("upload")
     public Result upload(MultipartFile file) {
         try {

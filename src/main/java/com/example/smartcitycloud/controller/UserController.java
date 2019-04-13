@@ -18,6 +18,7 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    /*** 登录 ***/
     @GetMapping("login")
     public Result login(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
@@ -28,6 +29,7 @@ public class UserController {
         }
     }
 
+    /*** 登出 ***/
     @GetMapping("logout")
     public Result logout(HttpSession session) {
         if (session != null) {
@@ -37,6 +39,7 @@ public class UserController {
         return Result.builder().build();
     }
 
+    /*** 添加账号 ***/
     @PostMapping("addAccount")
     public Result add(@RequestBody User user) {
         try {
@@ -48,6 +51,7 @@ public class UserController {
         }
     }
 
+    /*** 更新密码 ***/
     @GetMapping("updatePwd")
     public Result updatePwd(String oldPassword, String newPassword) {
         try {
@@ -59,6 +63,7 @@ public class UserController {
         }
     }
 
+    /*** 查询账号 ***/
     @PostMapping("getAccount")
     public Result getAccount(@RequestBody UserReq req) {
         try {

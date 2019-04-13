@@ -32,11 +32,14 @@
         <!--<table tableName="user" domainObjectName="User" enableCountByExample="true" enableUpdateByExample="true"-->
         <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
         <!--</table>-->
-        <table tableName="device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
-        </table>
+        <!--<table tableName="device" domainObjectName="Device" enableCountByExample="true" enableUpdateByExample="true"-->
+        <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
+        <!--</table>-->
         <!--<table tableName="record" domainObjectName="Record" enableCountByExample="true" enableUpdateByExample="true"-->
         <!--enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">-->
         <!--</table>-->
+        <table tableName="credentials" domainObjectName="Credentials" enableCountByExample="true" enableUpdateByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        </table>
     </context>
 </generatorConfiguration>
