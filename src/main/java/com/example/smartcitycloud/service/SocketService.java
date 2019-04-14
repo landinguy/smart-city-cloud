@@ -1,5 +1,7 @@
 package com.example.smartcitycloud.service;
 
+import com.example.smartcitycloud.dao.DeviceMapper;
+import com.example.smartcitycloud.entity.Device;
 import com.example.smartcitycloud.entity.Record;
 import com.example.smartcitycloud.util.Helper;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +23,8 @@ public class SocketService implements CommandLineRunner {
     private ThreadPoolTaskExecutor myExecutor;
     @Resource
     private RecordService recordService;
-
-    private final static int PORT = 8889;
+    @Resource
+    private DeviceMapper deviceMapper;
 
     @Override
     public void run(String... args) {
@@ -44,11 +46,22 @@ public class SocketService implements CommandLineRunner {
                             Helper.matchedVars(data).forEach(item -> {
                                 try {
                                     String[] split = item.split(",");
-                                    Record record = new Record();
-                                    record.setDeviceId(Integer.valueOf(split[0]));
-                                    record.setContent(split[3]);
-                                    record.setTime(String.valueOf(Helper.str2Timestamp(split[4])));
-                                    recordService.add(record);
+                                    String id = split[0];
+                                    String key = split[5];
+                                    Device device = deviceMapper.selectByPrimaryKey(Integer.valueOf(id));
+                                    if (device != null) {
+                                        if (device.getDeviceKey().equals(key)) {
+                                            Record record = new Record();
+                                            record.setDeviceId(Integer.valueOf(split[0]));
+                                            record.setContent(split[3]);
+                                            record.setTime(String.valueOf(Helper.str2Timestamp(split[4])));
+                                            recordService.add(record);
+                                        } else {
+                                            log.info("key is unmatched,deviceId#{},key#{}", id, key);
+                                        }
+                                    } else {
+                                        log.info("device doesn't exist,deviceId#{}", id);
+                                    }
                                 } catch (Exception e) {
                                     log.info("Incorrect data#{}", data);
                                 }
