@@ -5,10 +5,9 @@ import com.example.smartcitycloud.dao.CredentialsMapper;
 import com.example.smartcitycloud.dao.DeviceMapper;
 import com.example.smartcitycloud.dao.RecordMapper;
 import com.example.smartcitycloud.dao.UserMapper;
-import com.example.smartcitycloud.entity.Credentials;
-import com.example.smartcitycloud.entity.CredentialsExample;
 import com.example.smartcitycloud.entity.Device;
 import com.example.smartcitycloud.entity.DeviceExample;
+import com.example.smartcitycloud.util.Helper;
 import com.example.smartcitycloud.util.Result;
 import com.example.smartcitycloud.view.DeviceReq;
 import lombok.extern.slf4j.Slf4j;
@@ -44,12 +43,8 @@ public class DeviceService {
         if (id != null) {
             i = deviceMapper.updateByPrimaryKeySelective(device);
         } else {
+            device.setDeviceKey(Helper.getUUID());
             i = deviceMapper.insertSelective(device);
-            CredentialsExample example = new CredentialsExample();
-            example.createCriteria().andCidEqualTo(device.getDeviceKey());
-            Credentials credentials = new Credentials();
-            credentials.setStatus(1);
-            credentialsMapper.updateByExampleSelective(credentials, example);
         }
         if (i > 0) {
             log.info("add or update device successfully");
